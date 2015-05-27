@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Choisissez votre épreuve</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr class="header">
+        <th>Matière</th>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Actions</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th><%= @matiere.titre %></th>
+      </tr>
+    <% @matiere.epreuves.each do |epreuve| %>
+      <tr>
+        <td></td>
+        <th><a href=<%= resultats_show_path(epreuve.id) %>><%= epreuve.titre %></a></th>
+        <td><%= epreuve.date.strftime("%d-%m-%Y") %></td>
+        <td><%= link_to 'Modifier', edit_epreuve_path(epreuve) %></td>
+        <td><%= link_to 'Supprimer', epreuve, method: :delete, data: { confirm: 'Êtes-vour sûr ?' } %></td>         
+      </tr>
+    <% end %>
+    <tr>
+      <td><%= link_to 'Créer une nouvelle épreuve', new_epreuve_path %></td>
+    </tr>
+  </tbody>
+</table>
+<br>
+
+

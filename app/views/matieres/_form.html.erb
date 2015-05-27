@@ -1,0 +1,34 @@
+<%= form_for(@matiere) do |f| %>
+  <% if @matiere.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@matiere.errors.count, "error") %> prohibited this matiere from being saved:</h2>
+
+      <ul>
+      <% @matiere.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <table>
+    <tr><td><label for="matiere_title">Titre: </label><br>
+    <%= text_field 'matiere', 'titre' %></tr></td>
+    <tr><td><label for="matiere_debut">Date de début: </label><br>
+    <%= date_field 'matiere', 'debut' %></tr></td>
+    <tr><td><label for="matiere_fin">Date de fin: </label><br>
+    <%= date_field 'matiere', 'fin' %></tr></td>
+    <tr><td><label for="matiere_description">Description: </label><br>
+    <%= text_area 'matiere', 'description' %></tr></td>
+    <% if @utilisateur.type == 'Admin' %>
+      <p><label for="matiere_enseignant_id">Enseignant responsable: </label>
+      <%= collection_select(:matiere, :enseignant_id, Enseignant.all, :id, :fullname) %></p>
+    <% else %>
+      <%= hidden_field 'matiere', 'enseignant_id' %>
+    <% end %>
+    </table>
+    <%= f.submit 'Valider' %>
+    
+  </div>
+<% end %>

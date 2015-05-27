@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listes des matières</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    
+      <tr class="header">
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Début</th>
+        <th>Fin</th>
+        <th>Actions</th>
+      </tr>
+    <% @matieres.each do |matiere| %>
+      <a href=<%= matiere_path(matiere.id) %>></a>
+      <tr>
+        <td class="majuscule"><FONT size="3pt"><strong><a href=<%= matiere_path(matiere.id) %>><%= matiere.titre %></a></strong></FONT></td>
+        <td><%= matiere.description%></td>
+        <td><%= matiere.debut.strftime("%d-%m-%Y") %></td>
+        <td><%= matiere.fin.strftime("%d-%m-%Y")%></td>
+        <td><%= link_to 'Supprimer', matiere, method: :delete, data: { confirm: 'Etes vous sûr ?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nouvelle matière', new_matiere_path %>

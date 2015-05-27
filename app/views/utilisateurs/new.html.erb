@@ -1,0 +1,9 @@
+<% if @utilisateur.type == 'Etudiant' %>
+	<h1>Invitation</h1>
+<% else %>
+	<h1>Inscription</h1>
+<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Annuler', utilisateurs_path %>

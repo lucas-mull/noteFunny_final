@@ -1,0 +1,53 @@
+<p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
+
+<h1>Choisissez votre épreuve</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr class="header">
+        <th>Matière</th>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Actions</th>
+        <td></td>
+        <td></td>
+      </tr>
+      <% @matieres.each do |mat| %>
+      <tr>
+        <tr>
+          <th class="majuscule"><%= mat.titre %></th>
+        </tr>
+        <% mat.epreuves.each do |epreuve| %>
+          <tr>
+            <td></td>
+            <th><a href=<%= resultats_show_path(epreuve.id) %>><%= epreuve.titre %></a></th>
+            <td><%= epreuve.date.strftime("%d-%m-%Y") %></td>
+            <% if current_user.type != 'Etudiant' %>
+            <td><%= link_to 'Modifier', edit_epreuve_path(epreuve) %> | <%= link_to 'Supprimer', epreuve, method: :delete, data: { confirm: 'Etes vous sûr ?' } %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        <tr class="header">
+          <td>
+            <% if current_user.type != 'Etudiant' %>
+              <%= link_to 'Créer une nouvelle épreuve', epreuves_set_matiere_path(:matiere_id => mat.id), method: :post %>
+            <% end %>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<br>
