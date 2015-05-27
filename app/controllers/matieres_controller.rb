@@ -46,7 +46,7 @@ class MatieresController < ApplicationController
     # @matiere.enseignant_id = current_user.id
     respond_to do |format|
       if @matiere.save
-        format.html { redirect_to matieres_path, notice: 'Votre matiere a bien été modifié.' }
+        format.html { redirect_to matieres_path, alert: 'Matière créée.' }
         format.json { render :show, status: :created, location: @matiere }
       else
         format.html { render :new }
@@ -60,7 +60,7 @@ class MatieresController < ApplicationController
   def update
     respond_to do |format|
       if @matiere.update(matiere_params)
-        format.html { redirect_to @matiere, notice: 'La matière a été mise à jour.' }
+        format.html { redirect_to @matiere, alert: 'La matière a été mise à jour.' }
         format.json { render :show, status: :ok, location: @matiere }
       else
         format.html { render :edit }
@@ -80,7 +80,7 @@ class MatieresController < ApplicationController
     end
     @matiere.destroy
     respond_to do |format|
-      format.html { redirect_to matieres_url, notice: 'Votre matiere a bien été supprimé.' }
+      format.html { redirect_to matieres_url, notice: 'La matière a bien été supprimée.' }
       format.json { head :no_content }
     end
   end
