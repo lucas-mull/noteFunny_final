@@ -54,7 +54,7 @@ class UtilisateursController < ApplicationController
     respond_to do |format|
       if @utilisateur.save
         if @utilisateur.type == 'Enseignant'
-          format.html { redirect_to root_path, notice: 'Votre compte a été créé. Toutefois, un admin doit le valider. Vous recevrez un mail une fois cette opération effectuée' }
+          format.html { redirect_to root_path, notice: 'Votre compte a été créé. Toutefois, un admin doit le valider.' }
           format.json { render :show, status: :created, location: root_path }
         else
           format.html { redirect_to sendConfirmEmail_path(:matiere_id => current_matiere.id, :etudiant_id => @utilisateur.id, :temp_password => @password) }
